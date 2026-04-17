@@ -1,0 +1,34 @@
+﻿# Node
+node_modules/
+.next/
+dist/
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.class
+.venv/
+venv/
+env/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Supabase
+.supabase/
+
+# Tests
+.pytest_cache/
+htmlcov/
