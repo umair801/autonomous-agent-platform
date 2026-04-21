@@ -149,8 +149,9 @@ export default function Home() {
       }
       setHistory((prev) => [entry, ...prev])
       setActiveHistoryId(newSessionId)
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong.')
+    } catch (err: unknown) {
+  const errorMessage = err instanceof Error ? err.message : 'Something went wrong.'
+      setError(errorMessage)
     } finally {
       setIsLoading(false)
       wsRef.current?.close()
