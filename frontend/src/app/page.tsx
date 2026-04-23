@@ -103,7 +103,9 @@ export default function Home() {
 
   useEffect(() => {
     if (!sessionId) return
-    const ws = new WebSocket(`ws://localhost:8000/ws/execute/${sessionId}`)
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+    const wsUrl = apiUrl.replace('https://', 'wss://').replace('http://', 'ws://')
+    const ws = new WebSocket(`${wsUrl}/ws/execute/${sessionId}`)
     wsRef.current = ws
     ws.onmessage = (event) => {
       try {
@@ -130,7 +132,8 @@ export default function Home() {
     await new Promise((r) => setTimeout(r, 300))
 
     try {
-      const response = await fetch('http://localhost:8000/api/execute', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+      const response = await fetch(`${apiUrl}/api/execute`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ goal }),
